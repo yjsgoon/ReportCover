@@ -35,7 +35,7 @@ public class SelectUnivActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_univ);
 
-        listView = (ListView)findViewById(R.id.select_univ_listView);
+        listView = (ListView) findViewById(R.id.select_univ_listView);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class SelectUnivActivity extends AppCompatActivity implements
 
     public void refreshData() {
         try {
-            client.get("http://reportcover.pythonanywhere.com/loadUniv", new AsyncHttpResponseHandler() {
+            client.get("http://reportcover.pythonanywhere.com/university", new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int i, Header[] headers, byte[] bytes) {
                     String jsonData = new String(bytes);
@@ -65,7 +65,7 @@ public class SelectUnivActivity extends AppCompatActivity implements
                 public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                 }
             });
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             Log.i(TAG, "NETWORK ERROR : " + e);
         }
@@ -80,6 +80,26 @@ public class SelectUnivActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        ProxyUp.putDate(getApplicationContext(), getIntent().getStringExtra("email"),
+                getIntent().getStringExtra("lastConnectDate"), new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                        Log.e(TAG, "up onSuccess:" + i);
+                        Toast.makeText(getApplicationContext(), "Connection Success", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                        Log.e(TAG, "up onFailure:" + i);
+                        Toast.makeText(getApplicationContext(), "Connection Failure", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         progressDialog = ProgressDialog.show(SelectUnivActivity.this, "", "connecting...");
 
@@ -90,7 +110,6 @@ public class SelectUnivActivity extends AppCompatActivity implements
                         Log.e(TAG, "up onSuccess:" + i);
                         progressDialog.cancel();
                         Toast.makeText(getApplicationContext(), "Connection Success", Toast.LENGTH_SHORT).show();
-                        finish();
                     }
 
                     @Override

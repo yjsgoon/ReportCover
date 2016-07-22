@@ -1,5 +1,6 @@
 package kr.swmaestro.reportcover;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,9 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private SignInButton mSignInButton;
     private ProgressDialog progressDialog;
+    private String lastConnectDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,11 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
         startActivity(new Intent(this, SplashActivity.class));
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        lastConnectDate = dateFormat.format(Calendar.getInstance().getTime());
+
+
 
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
         mSignInButton.setOnClickListener(this);
@@ -98,6 +108,22 @@ public class MainActivity extends AppCompatActivity implements
             GoogleSignInAccount acct = result.getSignInAccount();
             Log.d(TAG, acct.getEmail());
 
+            ProxyUp.signup(acct.getEmail(), new AsyncHttpResponseHandler() {
+                @SuppressLint("LongLogTag")
+                @Override
+                public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                    Log.e(TAG, "up onSuccess:" + i);
+                    Toast.makeText(getApplicationContext(), "Connection Success", Toast.LENGTH_SHORT).show();
+                }
+
+                @SuppressLint("LongLogTag")
+                @Override
+                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                    Log.e(TAG, "up onFailure:" + i);
+                    Toast.makeText(getApplicationContext(), "Connection Failure", Toast.LENGTH_SHORT).show();
+                }
+            });
+
             progressDialog = ProgressDialog.show(MainActivity.this, "", "connecting...");
             if(checkPlayServices()) {
 
@@ -110,7 +136,9 @@ public class MainActivity extends AppCompatActivity implements
 
             Intent intent = new Intent(this, SelectUnivActivity.class);
             intent.putExtra("email", acct.getEmail());
+            intent.putExtra("lastDate", lastConnectDate);
             startActivity(intent);
+            finish();
         }
     }
 

@@ -4,8 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import kr.swmaestro.reportcover.R;
-
 /**
  * Created by Yoon-Jisoo on 2016-07-16.
  *

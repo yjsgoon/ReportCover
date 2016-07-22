@@ -2,7 +2,6 @@ package kr.swmaestro.reportcover;
 
 import android.annotation.SuppressLint;
 import android.app.IntentService;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;

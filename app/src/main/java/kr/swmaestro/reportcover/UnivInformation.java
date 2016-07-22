@@ -11,12 +11,14 @@ public class UnivInformation {
     private String univName;
     private String fileName;
     private String imgName;
+    private int refCount;
 
-    public UnivInformation(int univNumber, String univName, String fileName, String imgName) {
+    public UnivInformation(int univNumber, String univName, String fileName, String imgName, int refCount) {
         this.univNumber = univNumber;
         this.univName = univName;
         this.fileName = fileName;
         this.imgName = imgName;
+        this.refCount = refCount;
     }
 
     public int getUnivNumber() {
@@ -33,5 +35,9 @@ public class UnivInformation {
 
     public String getImgName() {
         return imgName;
+    }
+
+    public int getRefCount() {
+        return refCount;
     }
 }

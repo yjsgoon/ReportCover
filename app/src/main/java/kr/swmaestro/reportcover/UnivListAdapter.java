@@ -49,6 +49,9 @@ public class UnivListAdapter extends ArrayAdapter<UnivInformation> {
         TextView textView = (TextView) row.findViewById(R.id.univ_row_textView);
         textView.setText(univData.get(position).getUnivName());
 
+        TextView textView2 = (TextView) row.findViewById(R.id.univ_row_ref);
+        textView2.setText("Ref: " + String.valueOf(univData.get(position).getRefCount()));
+
         ImageView imageView = (ImageView) row.findViewById(R.id.univ_row_imageView);
 
         String img_path = context.getFilesDir().getPath() + "/" + univData.get(position).getImgName();

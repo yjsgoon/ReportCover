@@ -31,7 +31,8 @@ public class Dao {
                     + "                                        UnivNumber integer UNIQUE not null,"
                     + "                                        UnivName text not null,"
                     + "                                        FileName text not null,"
-                    + "                                        ImgName text not null);";
+                    + "                                        ImgName text not null,"
+                    + "                                        RefCount integer not null);";
             database.execSQL(sql);
         } catch (Exception e) {
             Log.e(TAG, "CREATE TABLE FAILED! - " + e);
@@ -44,6 +45,7 @@ public class Dao {
         String univName;
         String fileName;
         String imgName;
+        int refCount;
 
         FileDownloader fileDownloader = new FileDownloader(context);
 
@@ -57,11 +59,12 @@ public class Dao {
                 univName = jObj.getString("UnivName");
                 fileName = jObj.getString("FileName");
                 imgName = jObj.getString("ImgName");
+                refCount = jObj.getInt("RefCount");
 
                 Log.i(TAG, "UnivNumber: " + univNumber + " UnivName: " + univName);
 
-                String sql = "INSERT INTO UnivInformations (UnivNumber, UnivName, FileName, ImgName)"
-                        + " VALUES(" + univNumber + ",'" + univName + "','" + fileName +"','" + imgName + "');";
+                String sql = "INSERT INTO UnivInformations (UnivNumber, UnivName, FileName, ImgName, RefCount)"
+                        + " VALUES(" + univNumber + ",'" + univName + "','" + fileName +"','" + imgName + "', " + refCount + ");";
 
                 Log.d(TAG, "Query: " + sql);
 
@@ -86,6 +89,7 @@ public class Dao {
         String univName;
         String fileName;
         String imgName;
+        int refCount;
 
         String sql = "SELECT * From UnivInformations;";
         Cursor cursor = database.rawQuery(sql, null);
@@ -95,37 +99,16 @@ public class Dao {
             univName = cursor.getString(2);
             fileName = cursor.getString(3);
             imgName = cursor.getString(4);
+            refCount = cursor.getInt(5);
 
-            Log.d(TAG, "UnivName: " + univName + ", FileName: " + fileName + ", ImgName: " + imgName);
+            Log.d(TAG, "UnivName: " + univName + ", FileName: " + fileName +
+                    ", ImgName: " + imgName + ", RefCount: " + refCount);
 
-            univInformationList.add(new UnivInformation(univNumber, univName, fileName, imgName));
+            univInformationList.add(new UnivInformation(univNumber, univName, fileName, imgName, refCount));
         }
         cursor.close();
 
         return univInformationList;
-    }
-
-    public UnivInformation getUnivInformationByUnivNumber(int univNumber) {
-        UnivInformation univInformation = null;
-
-        String univName;
-        String fileName;
-        String imgName;
-
-        String sql = "SELECT * From UnivInformations WHERE UnivNumber = " + univNumber + ";";
-        Cursor cursor = database.rawQuery(sql, null);
-
-        cursor.moveToNext();
-        univNumber = cursor.getInt(1);
-        univName = cursor.getString(2);
-        fileName = cursor.getString(3);
-        imgName = cursor.getString(4);
-
-        univInformation = new UnivInformation(univNumber, univName, fileName, imgName);
-
-        cursor.close();
-
-        return univInformation;
     }
 }
 

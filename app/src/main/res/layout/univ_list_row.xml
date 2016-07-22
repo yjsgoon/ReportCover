@@ -10,9 +10,9 @@
         android:id="@+id/univ_row_imageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:src="@drawable/default_univ" />
 
@@ -24,12 +24,21 @@
 
         <TextView
             android:id="@+id/univ_row_textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
             android:text="Univ Large Text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
+        <TextView
+            android:id="@+id/univ_row_ref"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:text="Ref"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 </LinearLayout>
