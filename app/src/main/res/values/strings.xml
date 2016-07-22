@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ReportCover</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="loading">Loading…</string>
+
+    <string name="server_client_id">963413868068-j5anoapc8ndm56j4cuo0af294r0enpuf.apps.googleusercontent.com</string>
+</resources>
