@@ -106,9 +106,11 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
+        String email = null;
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
+            email = acct.getEmail();
             Log.d(TAG, acct.getEmail());
 
             ProxyUp.signup(acct.getEmail(), new AsyncHttpResponseHandler() {
@@ -119,26 +121,25 @@ public class MainActivity extends AppCompatActivity implements
                     Toast.makeText(getApplicationContext(), "Connection Success", Toast.LENGTH_SHORT).show();
                 }
 
-            @SuppressLint("LongLogTag")
-            @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                Log.e(TAG, "up onFailure:" + i);
-                Toast.makeText(getApplicationContext(), "Connection Failure", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        progressDialog = ProgressDialog.show(MainActivity.this, "", "connecting...");
+                @SuppressLint("LongLogTag")
+                @Override
+                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                    Log.e(TAG, "up onFailure:" + i);
+                    Toast.makeText(getApplicationContext(), "Connection Failure", Toast.LENGTH_SHORT).show();
+                }
+            });
+            progressDialog = ProgressDialog.show(MainActivity.this, "", "connecting...");
             if (checkPlayServices()) {
 
                 Intent intent = new Intent(this, RegistrationIntentService.class);
-                intent.putExtra("email", acct.getEmail());
+                intent.putExtra("email", email);
                 startService(intent);
             }
 
             progressDialog.cancel();
 
             Intent intent = new Intent(this, SelectUnivActivity.class);
-            intent.putExtra("email", acct.getEmail());
+            intent.putExtra("email", email);
             intent.putExtra("lastDate", lastConnectDate);
             startActivity(intent);
             finish();
