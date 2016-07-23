@@ -1,4 +1,4 @@
-package kr.swmaestro.reportcover;
+package kr.swmaestro.reportcover.gcm;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,9 +10,13 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import kr.swmaestro.reportcover.activity.MainActivity;
+import kr.swmaestro.reportcover.R;
+
 /**
- * Created by JiSoo on 2016-07-20.
+ * Created by Yoon-Jisoo on 2016-07-20.
  *
+ * 서버로부터 push를 받았을 경우 실행되는 서비스.
  */
 public class GcmListenerService extends com.google.android.gms.gcm.GcmListenerService {
     private static final String TAG = "GcmListenerService";
@@ -35,7 +39,7 @@ public class GcmListenerService extends com.google.android.gms.gcm.GcmListenerSe
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.notification)
                 .setContentTitle(title)

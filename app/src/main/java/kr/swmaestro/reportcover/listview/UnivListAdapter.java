@@ -1,10 +1,9 @@
-package kr.swmaestro.reportcover;
+package kr.swmaestro.reportcover.listview;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +13,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
+import kr.swmaestro.reportcover.R;
+
 /**
- * Created by JiSoo on 2016-07-18.
+ * Created by Yoon-Jisoo on 2016-07-18.
  *
+ * 대학 관련 자료를 위한 Custom List View Adapter.
  */
 public class UnivListAdapter extends ArrayAdapter<UnivInformation> {
-    private static final String TAG="UnivListAdapter";
+    private static final String TAG = "UnivListAdapter";
 
     private Context context;
     private int layoutResource;
@@ -41,7 +41,7 @@ public class UnivListAdapter extends ArrayAdapter<UnivInformation> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
 
-        if(row == null) {
+        if (row == null) {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResource, parent, false);
         }
@@ -60,7 +60,7 @@ public class UnivListAdapter extends ArrayAdapter<UnivInformation> {
         File img_load_path = new File(img_path);
         Log.i(TAG, "Image Load Path: " + img_load_path);
 
-        if(img_load_path.exists()) {
+        if (img_load_path.exists()) {
             Bitmap bitmap = BitmapFactory.decodeFile(img_path);
             imageView.setImageBitmap(bitmap);
         }

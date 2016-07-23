@@ -1,4 +1,4 @@
-package kr.swmaestro.reportcover;
+package kr.swmaestro.reportcover.connector;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,8 +11,9 @@ import java.io.File;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by JiSoo on 2016-07-18.
+ * Created by Yoon-Jisoo on 2016-07-18.
  *
+ * 서버로부터 파일(이미지)를 받아오는 클래스.
  */
 public class FileDownloader {
     private static final String TAG = "FileDownloader";
@@ -28,7 +29,7 @@ public class FileDownloader {
     public void downFile(String fileUrl, String fileName) {
         final File filePath = new File(context.getFilesDir().getPath() + "/" + fileName);
 
-        if(!filePath.exists()) {
+        if (!filePath.exists()) {
             client.get(fileUrl, new FileAsyncHttpResponseHandler(context) {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, File file) {

@@ -1,8 +1,9 @@
-package kr.swmaestro.reportcover;
+package kr.swmaestro.reportcover.listview;
 
 /**
- * Created by JiSoo on 2016-07-18.
+ * Created by Yoon-Jisoo on 2016-07-18.
  *
+ * 대학 관련 자료를 위한 Value Object.
  */
 public class UnivInformation {
     private static final String TAG = "UnivInformation";

@@ -1,4 +1,4 @@
-package kr.swmaestro.reportcover;
+package kr.swmaestro.reportcover.gcm;
 
 import android.annotation.SuppressLint;
 import android.app.IntentService;
@@ -13,10 +13,13 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import java.io.IOException;
 
 import cz.msebera.android.httpclient.Header;
+import kr.swmaestro.reportcover.connector.ProxyUp;
+import kr.swmaestro.reportcover.R;
 
 /**
- * Created by JiSoo on 2016-07-20.
+ * Created by Yoon-Jisoo on 2016-07-20.
  *
+ * GCM client token을 획득하고 구글 계정와 함께 서버로 전송.
  */
 public class RegistrationIntentService extends IntentService {
     private static final String TAG = "RegistrationIntentService";

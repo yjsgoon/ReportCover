@@ -1,4 +1,4 @@
-package kr.swmaestro.reportcover;
+package kr.swmaestro.reportcover.connector;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -11,9 +11,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import kr.swmaestro.reportcover.listview.UnivInformation;
+
 /**
- * Created by JiSoo on 2016-07-18.
+ * Created by Yoon-Jisoo on 2016-07-18.
  *
+ * 내부 DB 접근과 관리를 담당하는 클래스.
  */
 public class Dao {
     private static final String TAG = "Dao";
@@ -64,7 +67,7 @@ public class Dao {
                 Log.i(TAG, "UnivNumber: " + univNumber + " UnivName: " + univName);
 
                 String sql = "INSERT INTO UnivInformations (UnivNumber, UnivName, FileName, ImgName, RefCount)"
-                        + " VALUES(" + univNumber + ",'" + univName + "','" + fileName +"','" + imgName + "', " + refCount + ");";
+                        + " VALUES(" + univNumber + ",'" + univName + "','" + fileName + "','" + imgName + "', " + refCount + ");";
 
                 Log.d(TAG, "Query: " + sql);
 

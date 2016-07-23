@@ -1,4 +1,4 @@
-package kr.swmaestro.reportcover;
+package kr.swmaestro.reportcover.connector;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -14,9 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * Created by JiSoo on 2016-07-18.
+ * Created by Yoon-Jisoo on 2016-07-18.
  *
- *
+ * 서버 통신을 담당하는 클래스.
  */
 public class ProxyUp {
     private final static String TAG = "ProxyUp";
@@ -39,7 +39,7 @@ public class ProxyUp {
     }
 
     public static void selectUniv(int univNumber, String email,
-                                     AsyncHttpResponseHandler responseHandler) {
+                                  AsyncHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("univNumber", univNumber);
         params.put("email", email);

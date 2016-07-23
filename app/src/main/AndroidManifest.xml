@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +26,8 @@
                 android:name="com.google.android.gms.version"
                 android:value="@integer/google_play_services_version" />
         </activity>
-        <activity android:name=".SplashActivity" />
-        <activity android:name=".SelectUnivActivity" />
+        <activity android:name=".activity.SplashActivity" />
+        <activity android:name=".activity.SelectUnivActivity" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -41,7 +41,7 @@
         </receiver>
 
         <service
-            android:name="kr.swmaestro.reportcover.GcmListenerService"
+            android:name=".gcm.GcmListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -49,7 +49,7 @@
         </service>
 
         <service
-            android:name="kr.swmaestro.reportcover.InstanceIDListenerService"
+            android:name=".gcm.InstanceIDListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
@@ -57,7 +57,7 @@
         </service>
 
         <service
-            android:name="kr.swmaestro.reportcover.RegistrationIntentService"
+            android:name=".gcm.RegistrationIntentService"
             android:exported="false" />
 
         <meta-data

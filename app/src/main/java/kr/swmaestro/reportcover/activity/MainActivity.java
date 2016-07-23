@@ -1,4 +1,4 @@
-package kr.swmaestro.reportcover;
+package kr.swmaestro.reportcover.activity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -25,10 +25,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import cz.msebera.android.httpclient.Header;
+import kr.swmaestro.reportcover.connector.ProxyUp;
+import kr.swmaestro.reportcover.R;
+import kr.swmaestro.reportcover.gcm.RegistrationIntentService;
 
 /**
  * Created by Yoon-Jisoo on 2016-07-16.
  *
+ * 구글 계정 연동과, GCM 서비스와 SelectUnivActivity를 시작합니다.
  */
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -51,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lastConnectDate = dateFormat.format(Calendar.getInstance().getTime());
-
 
 
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
@@ -116,16 +119,16 @@ public class MainActivity extends AppCompatActivity implements
                     Toast.makeText(getApplicationContext(), "Connection Success", Toast.LENGTH_SHORT).show();
                 }
 
-                @SuppressLint("LongLogTag")
-                @Override
-                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                    Log.e(TAG, "up onFailure:" + i);
-                    Toast.makeText(getApplicationContext(), "Connection Failure", Toast.LENGTH_SHORT).show();
-                }
-            });
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                Log.e(TAG, "up onFailure:" + i);
+                Toast.makeText(getApplicationContext(), "Connection Failure", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-            progressDialog = ProgressDialog.show(MainActivity.this, "", "connecting...");
-            if(checkPlayServices()) {
+        progressDialog = ProgressDialog.show(MainActivity.this, "", "connecting...");
+            if (checkPlayServices()) {
 
                 Intent intent = new Intent(this, RegistrationIntentService.class);
                 intent.putExtra("email", acct.getEmail());

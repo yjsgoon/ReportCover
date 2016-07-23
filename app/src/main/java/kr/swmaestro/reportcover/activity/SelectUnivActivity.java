@@ -1,4 +1,4 @@
-package kr.swmaestro.reportcover;
+package kr.swmaestro.reportcover.activity;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +15,16 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import kr.swmaestro.reportcover.connector.Dao;
+import kr.swmaestro.reportcover.connector.ProxyUp;
+import kr.swmaestro.reportcover.R;
+import kr.swmaestro.reportcover.listview.UnivInformation;
+import kr.swmaestro.reportcover.listview.UnivListAdapter;
 
 /**
- * Created by JiSoo on 2016-07-18.
+ * Created by Yoon-Jisoo on 2016-07-18.
  *
+ * 사용자가 원하는 대학을 선택하면
  */
 
 public class SelectUnivActivity extends AppCompatActivity implements
