@@ -1,6 +1,6 @@
 # ReortCover
-현재, Google Play Store에 등재되어 있으며(google_play_store_image.png 참조)
-서버와의 전체 구조는 (architecture.png)를 참조하시면 감사하겠습니다.
+# Google Play Store : google_play_stroe.png
+# 구조 : architeture.png
 
 
 대학생들의 이쁘고 심플한 레포트 표지를 위한 서비스입니다.
