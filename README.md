@@ -2,6 +2,7 @@
 Google Play Store : google_play_stroe.png
 구조 : architeture.png
 
+***
 
 대학생들의 이쁘고 심플한 레포트 표지를 위한 서비스입니다.
 
